@@ -1,0 +1,84 @@
+﻿<html>
+
+<head>
+    <style>
+        .purchaseOrder {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .purchaseOrderHeader {
+            font-weight: bold;
+        }
+
+        .purchaseOrderItem {
+            margin-left: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="purchaseOrder">
+        <div class="purchaseOrderHeader">
+            Purchase Order
+        </div>
+        <div>
+            <span>Order Number: </span>
+            <span>@Model.Number</span>
+        </div>
+        <div>
+            <span>Order Date: </span>
+            <span>@Model.OrderDate</span>
+        </div>
+        <div>
+            <span>Description: </span>
+            <span>@Model.Description</span>
+        </div>
+        <div>
+            <span>Amount: </span>
+            <span>@Model.Amount</span>
+        </div>
+    </div>
+    @if (Model.Items != null && Model.Items.Count > 0)
+    {
+        <div>
+            <div class="purchaseOrderHeader">
+                Purchase Order Detail
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="10%">Number</th>
+                        <th width="70%">Item Description</th>
+                        <th width ="10%">Quantity</th>
+                        <th width ="10%">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.Number</td>
+                            <td>@item.Description</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div>
+            <span>No items found</span>
+        </div>
+    }
+</body>
+</html>
+
+@code {
+    [Parameter]
+    public PurchaseOrder Model { get; set; }
+}
